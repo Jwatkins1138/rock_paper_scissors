@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Rock Paper Scissors!</title>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+    <script>
+        function computerPlay() {
+           let roll = Math.random();
+           //console.log(roll);
+           let move = "not ready"
+           if (roll < .33) {
+                 move = "rock";
+           }
+            else if (roll < .66) {
+                 move = "paper";
+            }
+            else {
+                move = "scissors";
+            }
+
+        return(move);
+        }
+
+        //const computerMove = computerPlay();
+        
+        //console.log(playerMove);
+        //console.log(computerMove);
+        
+
+
+        function playRound(playerSelection, computerSelection) {
+            let winner = "undecided";
+            //console.log(playerSelection);
+            //console.log(computerSelection);
+            if ((playerSelection == "rock") && (computerSelection == "rock")) {
+                winner = "neither";
+            }
+            else if ( (playerSelection == "rock") && (computerSelection == "paper") ) {
+                winner = "computer";
+            }
+            else if ( (playerSelection == "rock") && (computerSelection == "scissors") ) {
+                winner = "player";
+            }
+            else if ( (playerSelection == "paper") && (computerSelection == "rock") ) {
+                winner = "player";
+            }
+            else if ( (playerSelection == "paper") && (computerSelection == "paper") ) {
+                winner = "neither";
+            }
+            else if ( (playerSelection == "paper") && (computerSelection == "scissors") ) {
+                winner = "computer";
+            }
+            else if ( (playerSelection == "scissors") && (computerSelection == "rock") ) {
+                winner = "computer";
+            }
+            else if ( (playerSelection == "scissors") && (computerSelection == "paper") ) {
+                winner = "player";
+            }
+            else if ( (playerSelection == "scissors") && (computerSelection == "scissors") ) {
+                winner = "neither";
+            }
+            else {
+                alert("something went wrong");
+            }
+            console.log("player used",playerSelection,"- computer used",computerSelection,"-",winner,"is victorious");
+            return winner;
+        }
+        //playRound(playerMove, computerMove);
+
+        function game() {
+            let round = 0;
+            let playerWins = 0;
+            let computerWins = 0;
+            while(round < 5) {
+                
+                let playerMove = prompt("what is your move?").toLowerCase();
+                let computerMove = computerPlay();
+                let roundWinner = playRound(playerMove, computerMove);
+                if(roundWinner == "player") {
+                    playerWins++;
+                }
+                if(roundWinner == "computer") {
+                    computerWins++;
+                }
+                round++
+            }
+            console.log("player won",playerWins);
+            console.log("computer won",computerWins);
+            if(playerWins > computerWins){
+                console.log("The player has won the game.");
+            }
+            else if(computerWins > playerWins){
+                console.log("The computer has won the game.");
+            }
+            else {
+                console.log("Nobody wins.");
+            }
+        }
+        game();
+
+    </script>
+	</body>
+</html>
