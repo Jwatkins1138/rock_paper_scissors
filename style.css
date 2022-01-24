@@ -1,0 +1,51 @@
+h1 {
+    margin: 25px;
+    color: red;
+    text-shadow: 2px 2px 2px black;
+}
+
+#scoreBoard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    margin: 25px;
+   
+}
+.scoreBottom {
+    display: flex;
+    justify-content: space-evenly;
+    
+}
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+    margin: 10px;
+    border:crimson solid 5px;
+    
+}
+.selectionBox {
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+.bottonBox {
+display: flex;
+margin: 25px;
+
+}
+button {
+    width: 80px;
+}
+.lastMoveBox {
+    display: flex;
+    justify-content: center;
+}
+.lastMoveBox {
+    height: 100px;
+    display: flex;
+    align-items: center;
+}
