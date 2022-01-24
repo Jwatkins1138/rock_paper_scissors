@@ -3,8 +3,34 @@
 	<head>
 		<title>Rock Paper Scissors!</title>
 		<meta charset="UTF-8">
+        <link rel="stylesheet" href="style.css">
 	</head>
 	<body>
+        <div class="selectionBox">
+            <h1>Make a Selection</h1>
+            <div class="buttonBox">
+            <button id='rockBtn'>rock</button>
+            <button id='paperBtn'>paper</button>
+            <button id='scissorsBtn'>scissors</button>
+            </div>
+        </div>
+        <div class='lastMoveBox'>
+        <div id='lastMove'></div>
+         </div>    
+        <div id='scoreBoard'>
+            <h2 class= 'scoreTop'>Scoreboard</h2>
+            <div class= 'scoreBottom'>
+             <div class='column'>Player
+                <div id='playerScore'></div>
+            </div>
+             <div class='column'>Computer
+                <div id='computerScore'></div>
+                </div>
+                </div>
+                <div id='winner'></div>
+        </div>
+
+
     <script>
         function computerPlay() {
            let roll = Math.random();
@@ -22,41 +48,44 @@
 
         return(move);
         }
+        let playerWins = 0;
+        let computerWins = 0;
+        document.getElementById('playerScore').innerHTML = playerWins;
+        document.getElementById('computerScore').innerHTML = computerWins;
 
-        //const computerMove = computerPlay();
         
-        //console.log(playerMove);
-        //console.log(computerMove);
-        
-
-
         function playRound(playerSelection, computerSelection) {
             let winner = "undecided";
-            //console.log(playerSelection);
-            //console.log(computerSelection);
+            
             if ((playerSelection == "rock") && (computerSelection == "rock")) {
                 winner = "neither";
             }
             else if ( (playerSelection == "rock") && (computerSelection == "paper") ) {
                 winner = "computer";
+                computerWins++;
             }
             else if ( (playerSelection == "rock") && (computerSelection == "scissors") ) {
                 winner = "player";
+                playerWins++;
             }
             else if ( (playerSelection == "paper") && (computerSelection == "rock") ) {
                 winner = "player";
+                playerWins++
             }
             else if ( (playerSelection == "paper") && (computerSelection == "paper") ) {
                 winner = "neither";
             }
             else if ( (playerSelection == "paper") && (computerSelection == "scissors") ) {
                 winner = "computer";
+                computerWins++;
             }
             else if ( (playerSelection == "scissors") && (computerSelection == "rock") ) {
                 winner = "computer";
+                computerWins++;
             }
             else if ( (playerSelection == "scissors") && (computerSelection == "paper") ) {
                 winner = "player";
+                playerWins++;
             }
             else if ( (playerSelection == "scissors") && (computerSelection == "scissors") ) {
                 winner = "neither";
@@ -64,41 +93,46 @@
             else {
                 alert("something went wrong");
             }
-            console.log("player used",playerSelection,"- computer used",computerSelection,"-",winner,"is victorious");
-            return winner;
+            document.getElementById('lastMove').innerHTML = "player used "+ playerSelection +", computer used "+computerSelection+". "+winner+" is victorious for this round.";
         }
-        //playRound(playerMove, computerMove);
-
-        function game() {
-            let round = 0;
-            let playerWins = 0;
-            let computerWins = 0;
-            while(round < 5) {
-                
-                let playerMove = prompt("what is your move?").toLowerCase();
-                let computerMove = computerPlay();
-                let roundWinner = playRound(playerMove, computerMove);
-                if(roundWinner == "player") {
-                    playerWins++;
-                }
-                if(roundWinner == "computer") {
-                    computerWins++;
-                }
-                round++
-            }
-            console.log("player won",playerWins);
-            console.log("computer won",computerWins);
-            if(playerWins > computerWins){
-                console.log("The player has won the game.");
-            }
-            else if(computerWins > playerWins){
-                console.log("The computer has won the game.");
-            }
-            else {
-                console.log("Nobody wins.");
-            }
+        
+        function checkWinner(){
+        if(playerWins >= 5) {
+            console.log("player wins");
+            document.getElementById('winner').innerHTML = "Player won the last game.";
+            playerWins = 0;
+            computerWins = 0;
         }
-        game();
+        if(computerWins >= 5) {
+            console.log("computer wins");
+            document.getElementById('winner').innerHTML = "Computer won the last game.";
+            playerWins = 0;
+            computerWins = 0;
+        }
+        document.getElementById('playerScore').innerHTML = playerWins;
+        document.getElementById('computerScore').innerHTML = computerWins;
+    }
+        const rockBtn = document.getElementById('rockBtn');
+        const paperBtn = document.getElementById('paperBtn');
+        const scissorsBtn = document.getElementById('scissorsBtn');
+        rockBtn.addEventListener('click', function() {
+            playRound('rock', computerPlay());
+            console.log(playerWins);
+            console.log(computerWins);
+            checkWinner();
+        });
+        paperBtn.addEventListener('click', function() {
+            playRound('paper', computerPlay());
+            console.log('paper');
+            checkWinner();
+        });
+        scissorsBtn.addEventListener('click', function() {
+            playRound('scissors', computerPlay());
+            console.log('scissors');
+            checkWinner();
+        });
+        
+    
 
     </script>
 	</body>
